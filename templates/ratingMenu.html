@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<h2 style="text-align: center;margin-top: 10px;">Give Us Feedback!</h2>
+
+<div class="container" style="background: #f9d4a8;"><img style="width: 350px;height: 250px;margin-left: 20px;">
+    <h2 style="margin-left: 20px;text-align: center;">{{menuname}}</h2>
+    <p style="text-align: center;">{{chefname}}</p>
+
+    <form class = "form-group" method="POST" action="{{ url_for( 'calculatation' ) }}">
+        
+        Rate: <select name="ratingMenu">
+
+            {%for rate in range(6)%} 
+                <option value={{rate}}>{{rate}}</option>
+            {%endfor%} 
+        
+        </select>
+
+            <input type="text" placeholder="Comment" style="align-items: center;justify-content: center;text-align: center;margin: auto;width: 230px;">
+                
+            <div style="margin-left: 125px;margin-top: 10px;width: 160px;">
+                <button class="btn btn-primary" style="background: rgb(251,111,80);">SUBMIT</button><br>
+                <a href="/fridgeSelection/ingredient/resultmenu/recipe/finish/rateMenu" style="">No Thanks</a>
+            </div>
+
+            <p style="text-align: center;margin-top: 10px;">Rate and Comment to Get Coins!</p>
+            
+    </form>
+
+    
+    
+
+</div>
+
+
+
+
+{% endblock %}

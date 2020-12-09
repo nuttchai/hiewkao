@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+{% block body %}
+
+
+<h2 style="text-align: center; margin-top: 10px;">Menu Recipe</h2>
+
+    <h2 style="margin-left: 20px;">{{menuInfo["menu"]}}</h2>
+    <h6 style="margin-left: 20px;">By {{menuInfo["chef"]}}</h6>
+    <p style="text-align: center;"><img src="{{ url_for('static', filename= menuInfo["pic"] ) }}" alt="Menu Picture"></p>
+    
+    <h4 style="margin-left: 20px;">description</h4>
+    <h6 style="margin-top: 5%; margin-left: 20px;">{{menuInfo["desc"]}}</h6>
+    <h4 style="margin-top: 10%; margin-left: 20px;">Ingredients</h4>
+    <h6 style="margin-top: 5%; margin-left: 20px;">
+
+        {% for ingre in menuInfo["ingr"] %}
+            {{ingre[0]}} {{ingre[1]}} {{ingre[2]}} <br>
+        {% endfor %}
+    
+    </h6><br>
+
+    {% if menuInfo["vdo"] != "" %}
+        <p style="text-align: center;"><iframe allowfullscreen="" frameborder="0" src="{{menuInfo["vdo"]}}"></iframe></p>
+    {% endif %}
+        
+    <h4 style="margin-top: 10%;margin-left: 20px;">Steps</h4>
+    <h6 style="margin-top: 5%;margin-left: 20px;">
+        {% for step in menuInfo["step"] %}
+            {{step}}<br>
+        {% endfor %}
+    </h6>
+
+{% endblock %}

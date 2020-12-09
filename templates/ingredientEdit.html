@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<h2 style="margin-top: 10px; text-align: center;">Your Ingredient</h2><br>
+
+    {% set check = {'type': '', 'first': '1'} %}
+    {% for ingredient in ingredients %}
+        
+        {% if check.first == '1' %} 
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ingredient["Type"]}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+            {% if check.update({'first': '0' })%} {% endif %}
+
+        {% elif check.type != ingredient["Type"] %} 
+
+                </tbody>
+            </table>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ingredient["Type"]}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+        {% endif %}
+                    
+        <tr><td>
+            <div class="form-check">
+                <label class="form-check-label" for="formCheck-1">{{ingredient["IngreName"]}}<img></label>
+            </div>
+        </td></tr>
+
+        {% if check.update({'type': ingredient["Type"] })%} {% endif %}
+
+    {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="fixed-footer-button">
+        <div class="container">
+            <a href="/fridgeSelection/edit/displayIngredient/addIngre"><button class = "btn btn-primary btn-lg" style="float: right;">Add</button></a>
+            <a href="/fridgeSelection/edit/displayIngredient/removeIngre"><button class = "btn btn-primary btn-lg" style="float: left;">Remove</button></a>
+        </div>        
+    </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<h2 style="margin-top: 10px;text-align: center;">Fridge Selection</h2><br>
+
+<form class = "fridge" method="POST" action="{{ url_for( 'navigateMode' ) }}">
+
+    <select name="selectFridge">
+
+        {%for fridge in fridges%} 
+            <option value={{fridge[1]}}>{{fridge[1]}}</option>
+        {%endfor%} 
+
+    </select>
+
+    <input type="submit" name="submit_button" value="cook">
+    <input type="submit" name="submit_button" value="edit">
+
+</form>
+
+
+<a href="/"><button class = "button">Return To Main Menu</button></a>
+
+{% endblock %}

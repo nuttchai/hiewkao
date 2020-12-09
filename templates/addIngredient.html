@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+{% block body %}
+
+<h2 style="margin-top: 10px; text-align: center;">Add Ingredient</h2><br>
+
+<form method="POST" action="{{ url_for( 'editingIngredient' ) }}">
+
+    {% set check = {'type': '', 'first': '1'} %}
+    {% for ingredient in ingredients %}
+        
+        {% if check.first == '1' %} 
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ingredient[3]}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+            {% if check.update({'first': '0' })%} {% endif %}
+
+        {% elif check.type != ingredient[3] %} 
+
+                </tbody>
+            </table>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ingredient[3]}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+        {% endif %}
+
+        <tr><td>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ingredient[0]}}"  id="formCheck-1" name="addCheckbox"><label class="form-check-label" for="formCheck-1"></label>{{ingredient[1]}}<img></label>
+            </div>
+        
+        </td></tr>
+
+        {% if check.update({'type': ingredient[3] })%} {% endif %}
+    {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="fixed-footer-button">
+        <div class="container">
+            <button class="btn btn-primary btn-lg" style="float: right;" >Next</button>
+            <a href="/fridgeSelection/edit/displayIngredient"><button class="btn btn-primary btn-lg" type="button" style="float: left;">Back</button></a>
+        </div>        
+    </div>
+    
+
+</form>
+
+{% endblock %}

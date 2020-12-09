@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+
+{% block body %}
+
+    <h2 class="text-center" style="margin-top: 10px;">Confirm Ingredients</h2>
+
+    <div class="table-responsive" style="margin-top: 10%;">
+        <table class="table">
+            <thead>
+                <tr></tr>
+            </thead>
+            <tbody>
+
+                {%for eachIngre in ingredients%} 
+
+                    {% if eachIngre["step"] == 0 %}
+                        <tr>
+                    {% endif %}
+                    
+                    <td><img>{{eachIngre["ingredient"]}}</td>
+                    
+                    {% if eachIngre["step"] == 1 %}
+                        </tr>
+                    {% endif %}
+
+                {%endfor%}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="fixed-footer-button">
+        <div class="container">
+            <a href="/fridgeSelection/ingredient/resultmenu"><button class="btn btn-primary btn-lg" type="button" style="float: right;">Next</button></a>
+            <a href="/fridgeSelection/ingredient"><button class="btn btn-primary btn-lg" type="button" style="float: left;">Back</button></a>
+        </div>        
+    </div>
+
+{% endblock %}

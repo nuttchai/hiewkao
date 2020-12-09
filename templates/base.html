@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <style>
+
+        body{        
+            padding-bottom: 60px;
+        }
+
+        .fixed-footer-button{
+            width: 100%;
+            position: fixed;        
+            background: #fff;
+            padding: 8px 0;
+            color: #fff;
+            bottom: 0;
+        }
+
+    </style>
+
+    <title>{% block content %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Header-Blue.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-Clean.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-with-Button.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-with-Search.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Testimonials.css') }}">
+
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+    
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid"><a class="navbar-brand" href="/">HIEWKAO</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Feeds</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for( 'displayFridge' ) }}">My Fridge</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="/coinshop">Coin Shop</a></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+</body>
+</html>
