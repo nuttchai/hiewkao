@@ -9,11 +9,11 @@
 {% block body %}
 
 
-<h2 style="text-align: center; margin-top: 10px;">Menu Recipe</h2>
+    <h2 style="text-align: center; margin-top: 10px;">Menu Recipe</h2>
 
     <h2 style="margin-left: 20px;">{{menuInfo["menu"]}}</h2>
-    <h6 style="margin-left: 20px;">By {{menuInfo["chef"]}}</h6>
-    <p style="text-align: center;"><img src="{{ url_for('static', filename= menuInfo["pic"] ) }}" alt="Menu Picture"></p>
+    <h6 style="margin-left: 20px;">By {{menuInfo["chef"]}}</h6><br>
+    <p style="text-align: center;"><img src="{{ url_for('static', filename= menuInfo["pic"]) }}" alt="Menu Picture" width="80%"></p>
     
     <h4 style="margin-left: 20px;">description</h4>
     <h6 style="margin-top: 5%; margin-left: 20px;">{{menuInfo["desc"]}}</h6>
@@ -25,16 +25,26 @@
         {% endfor %}
     
     </h6><br>
-
-    {% if menuInfo["vdo"] != "" %}
-        <p style="text-align: center;"><iframe allowfullscreen="" frameborder="0" src="{{menuInfo["vdo"]}}"></iframe></p>
+    
+    {% if menuInfo["vdo"] != "-" %}
+        <p style="text-align: center;"><iframe src="{{menuInfo["vdo"]}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
     {% endif %}
         
     <h4 style="margin-top: 10%;margin-left: 20px;">Steps</h4>
     <h6 style="margin-top: 5%;margin-left: 20px;">
         {% for step in menuInfo["step"] %}
-            {{step}}<br>
+            {{step}}<br><br>
         {% endfor %}
     </h6>
+
+    <div id="button">
+        <div class="container" style="text-align: right;">
+            
+            <a href="/fridgeSelection/ingredient/resultmenu"><button class="btn btn-warning btn-circle btn-xl"><i class="glyphicon glyphicon-remove" name="finishButton"></i>Back</button></a>
+
+            <a href="/fridgeSelection/ingredient/resultmenu/recipe/finish"><button class="btn btn-warning btn-circle btn-xl"><i class="glyphicon glyphicon-remove" name="finishButton"></i>Finish</button></a>
+            
+        </div>        
+    </div>
 
 {% endblock %}

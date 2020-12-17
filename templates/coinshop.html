@@ -1,65 +1,62 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
+    <style>
+        br {
+            display: block;
+            margin: 3px 0;
+        }
+    </style>
 {% endblock %}
 
 
 
 {% block body %}
 
-    <div class="table-responsive">
+    <div class="table-responsive" style="margin-top: 7%;background: #ffbc8b;">
         <table class="table">
-            <thead>
-                <tr></tr>
-            </thead>
-            <tbody>
-                <tr></tr>
-            </tbody>
-        </table>
-    </div>
-    <h1 class="text-center">COIN</h1>
-    <div class="table-responsive" style="margin-top: 5%;">
-        <table class="table">
-            <thead>
-                <tr></tr>
-            </thead>
+            <head>
+                <tr>
+                    <th style="text-align: left;color: var(--dark);">COIN</th>
+                </tr>
+            </head>
             <tbody>
                 <tr>
-                    <td><img style="margin-left: 30%;">
-                        <h1 class="text-center">100</h1>
+                    <td style="text-align: center; margin-top: 5%;"><img src="{{ url_for('static', filename='img/coin100.png') }}" alt="100 coins" style="width: 30%;">
+                        <header></header><br><div style="font-size: 13px;">100 Coin/</div><div style="font-size: 13px;">59 Baht</div>
                     </td>
-                    <td><img style="margin-left: 30%;">
-                        <h1 class="text-center">100</h1>
+                    <td style="text-align: center;"><img src="{{ url_for('static', filename='img/coin300.png') }}" style="width: 30%;">
+                        <header></header><br><div style="font-size: 13px;">300 Coin/</div><div style="font-size: 13px;">149 Baht</div>
                     </td>
                 </tr>
                 <tr>
-                    <td><img style="margin-left: 30%;">
-                        <h1 class="text-center">100</h1>
+                    <td style="text-align: center;"><img src="{{ url_for('static', filename='img/coin650.png') }}" style="width: 30%;">
+                        <header></header><br><div style="font-size: 13px;">650 Coin/</div><div style="font-size: 13px;">299 Baht</div>
                     </td>
-                    <td><img style="margin-left: 30%;">
-                        <h1 class="text-center">100</h1>
+                    <td style="background: fff;text-align: center;"><img style="width: 30%;text-align: center;" src="{{ url_for('static', filename='img/coin1200.png') }}">
+                        <header></header><br><br><div style="font-size: 13px;">1200 Coin/</div><div style="font-size: 13px;">499 Baht</div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <h1 class="text-center">FAMILY PACK</h1>
-    <div class="table-responsive">
+    <div class="table-responsive" style="margin-top: 9%;background: #ffbc8b;">
         <table class="table">
-            <thead>
-                <tr></tr>
-            </thead>
-            <tbody>
-                <tr></tr>
+            <head>
                 <tr>
-                    <td><img style="margin-left: 30%;">
-                        <h1 class="text-center">100</h1>
+                    <th>FAMILY PACK</th>
+                </tr>
+            </head>
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><img src="{{ url_for('static', filename='img/calendar31.png') }}" style="width: 30%;">
+                        <header></header><br><div style="font-size: 13px;">59 Coin</div>
                     </td>
-                    <td><img style="margin-left: 30%;">
-                        <h1 class="text-center">100</h1>
+                    <td style="text-align: center;"><img src="{{ url_for('static', filename='img/calendar365.png') }}"style="width: 37%;">
+                        <header></header><br><div style="font-size: 13px;">550 Coin</div>
                     </td>
                 </tr>
+                <tr></tr>
             </tbody>
         </table>
     </div>

@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
+    <style>
+        br {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
 {% endblock %}
 
 
@@ -13,11 +18,24 @@
     <form class = "menu" method="POST" action="{{ url_for( 'displayRecipe' ) }}">
         
         {%for menu in listMenu%} 
-            <button type="submit" name="selectMenu" value={{menu['FoodID']}} class="container" style="background-color: #f9d4a6;border-radius: 15px;width: 100;margin-top: 5%;">
-                <img style="margin-top: 10%;margin-left: 40%;">
-                <h4 class="text-center">{{menu['menuName']}}</h4>
-                <h6 class="text-center">{{menu['Rate']}}</h6>
-            </button>
+            <div class="container">
+                <button type="submit" name="selectMenu" value={{menu['FoodID']}} class="container" style="background-color: #f9d4a6;border-radius: 15px;width: 100;margin-top: 5%;">
+                <br>
+                <div class="row">
+                    <div class="col-sm">
+                        <img src="{{ url_for('static', filename= menu['Picture']) }}" style="width: 40%;">
+                    </div>
+                    <div class="col-sm">
+                            {{menu['menuName']}} 
+                            [<img src="{{ url_for('static', filename= 'img/star.png') }}" style="width: 6%;"> {{menu['Rate']}}]
+                    </div>
+                  </div>
+                  <br>
+                
+                    
+                    
+                </button>
+            </div>
         {%endfor%}
 
     </form>

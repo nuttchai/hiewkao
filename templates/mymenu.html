@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        br {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+{% endblock %}
+
+
+
+{% block body %}
+
+    <h1 style="font-size: 30px;color: var(--dark);margin-left: 5%;">My Menu</h1>
+    <div class="container"><img src="{{ url_for('static', filename= 'img/garlicSpaghetti.jpg') }}" style="width: 100%;margin-top: 5%;">
+        <h1 style="height: 33px;font-size: 23px;">Spaghetti &nbsp; <img src="{{ url_for('static', filename= 'img/star.png') }}" style="width: 5%;"> 4.7 </p></h1>
+        <h1 style="font-size: 16px;margin-top: -4%;">by chef Nutt</h1>
+    </div>
+    <div class="container"><img src="{{ url_for('static', filename= 'img/padThai.jpg') }}" style="width: 100%;margin-top: 5%;">
+        <h1 style="height: 33px;font-size: 23px;">PadThai &nbsp; <img src="{{ url_for('static', filename= 'img/star.png') }}" style="width: 5%;"> 4.5 </p></h1>
+        <h1 style="font-size: 16px;margin-top: -4%;">by chef Bob</h1>
+    </div>
+    <div class="container"><img src="{{ url_for('static', filename= 'img/friedRice.jpg') }}" style="width: 100%;margin-top: 5%;">
+        <h1 style="height: 33px;font-size: 23px;">KAO PAD KAI &nbsp; <img src="{{ url_for('static', filename= 'img/star.png') }}" style="width: 5%;"> 5.0 </p></h1> 
+        <h1 style="font-size: 16px;margin-top: -4%;">by chef Gunn</h1>
+    </div>
+    
+{% endblock %}
+
+
+<body>
+    
+    
+
+</body>
+
+</html>

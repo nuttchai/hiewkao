@@ -1,6 +1,38 @@
 {% extends 'base.html' %}
 
-{% block head %}
+{% block head %}   
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <style>
+
+        .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+        }
+        .btn-circle.btn-lg {
+        width: 50px;
+        height: 50px;
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 25px;
+        }
+        .btn-circle.btn-xl {
+        width: 70px;
+        height: 70px;
+        padding: 10px 16px;
+        font-size: 24px;
+        line-height: 1.33;
+        border-radius: 35px;
+        }
+        
+    </style>
 
 {% endblock %}
 
@@ -12,20 +44,20 @@
 
 <form class = "fridge" method="POST" action="{{ url_for( 'navigateMode' ) }}">
 
-    <select name="selectFridge">
-
+    <select style="height: 40px;" class="browser-default custom-select" searchable="Search here.." name="selectFridge">
+        <option style="font-size: 13px;" value="none">Choose your fridge</option>
         {%for fridge in fridges%} 
-            <option value={{fridge[1]}}>{{fridge[1]}}</option>
+            <option style="font-size: 13px;"  value={{fridge[1]}}>{{fridge[1]}}</option>
         {%endfor%} 
-
     </select>
 
-    <input type="submit" name="submit_button" value="cook">
-    <input type="submit" name="submit_button" value="edit">
+    <br><br>
+
+    <div style="text-align: center;">
+        <button class="btn btn-default btn-circle btn-lg" type="submit" name="submit_button" value="cook"><i class="glyphicon glyphicon-ok"></i></button>
+        <button class="btn btn-default btn-circle btn-lg" type="submit" name="submit_button" value="edit"><i class="glyphicon glyphicon-list"></i></button>
+    </div>
 
 </form>
-
-
-<a href="/"><button class = "button">Return To Main Menu</button></a>
 
 {% endblock %}

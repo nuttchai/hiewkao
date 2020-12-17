@@ -4,23 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-    <style>
-
-        body{        
-            padding-bottom: 60px;
-        }
-
-        .fixed-footer-button{
-            width: 100%;
-            position: fixed;        
-            background: #fff;
-            padding: 8px 0;
-            color: #fff;
-            bottom: 0;
-        }
-
-    </style>
-
     <title>{% block content %}{% endblock %}</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
@@ -29,10 +12,35 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-Clean.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-with-Button.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/Navigation-with-Search.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css//Navigation-with-Search.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Testimonials.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.2.0/aos.css">
 
     {% block head %}{% endblock %}
+
+    <style>
+
+        body {
+            padding-bottom: 60px;
+            padding: 10px;
+            background-color: #fef2e8;
+        }
+
+        #button {
+            padding: 10px;
+            background-color: #fef2e8;
+        }
+
+        .fixed-footer-button {
+            width: 100%;
+            position: fixed;        
+            background: #fff;
+            padding: 8px 0;
+            color: #fff;
+            bottom: 0;
+        }
+        
+    </style>
 
 </head>
 <body>
@@ -43,8 +51,8 @@
                 id="navcol-1">
                 <ul class="nav navbar-nav">
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Feeds</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for( 'displayFridge' ) }}">My Fridge</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/mymenu">My Menu</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ url_for( 'displayFridge' ) }}">My Fridge</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
                     <li class="nav-item"><a class="nav-link active" href="/coinshop">Coin Shop</a></li>

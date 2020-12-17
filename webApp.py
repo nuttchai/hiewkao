@@ -1,5 +1,6 @@
 import json 
 import time
+import random
 from flask import Flask, redirect, render_template, url_for, jsonify, request
 from flaskext.mysql import MySQL
 from calculaterate import calRate
@@ -22,7 +23,7 @@ cursor = con.cursor()
 
 class RequireItem:
 
-    def __init__(self, customerid=None, menuid=None, chefname=None, menuname=None,  selectFridge=None, allIngredient=None, selectIngredient=None, userRate=-1, status=False):
+    def __init__(self, customerid=None, menuid=None, chefname=None, menuname=None,  selectFridge=None, allIngredient=None, picture=None, selectIngredient=None, userRate=-1, status=False):
         self.customerid         = customerid
         self.menuid             = menuid
         self.menuname           = menuname
@@ -31,6 +32,7 @@ class RequireItem:
         self.allIngredient      = allIngredient
         self.selectIngredient   = selectIngredient
         self.userRate           = userRate  
+        self.picture            = picture
         self.status             = status
 
 usageInfo = RequireItem()
@@ -52,7 +54,28 @@ def userSetup():
 @app.route('/homePage')
 def homePage():
 
-    return render_template('homePage.html', name='User01')
+    """
+    sql = "SELECT * FROM MenuList"
+    cursor.execute(sql)
+    allMenu = cursor.fetchall() 
+    number = random.randint(0, len(allMenu)-1)
+    selectedMenu = allMenu[number]
+    chefname = selectedMenu[1]
+    menuName = selectedMenu[2]
+    menuPic  = selectedMenu[7]
+    rate     = json.loads(selectedMenu[8])["avgRate"]
+    menuDetail = {"name": menuName, "chef": chefname, "picture": menuPic, "rate": rate}
+    """
+    
+    menuList = [{"name": "Fried Chicken", "rate": "4.6", "file": "img/FriedChicken_rand.jpg"}, 
+                {"name": "Taco", "rate": "4.3", "file": "img/Taco_rand.jpg"}, 
+                {"name": "Bruschetta Chicken Avocados", "rate": "4.7", "file": "img/BruschettaChickenStuffedAvocados_rand.jpg"}, 
+                {"name": "Cherry Tomato Confit", "rate": "4.9", "file": "img/CherryTomatoConfit_rand.jpg"}, 
+                {"name": "Fettuccine Alfredo", "rate": "4.8", "file": "img/FettuccineAlfredo_rand.jpg"}]
+
+    result = random.choice(menuList)
+
+    return render_template('homePage.html', name='User01', randMenu=result)
 
 
 # frige selection page (can select cook or edit mode)
@@ -61,7 +84,7 @@ def displayFridge():
     
     # Find all possible menu from customerid
     global usageInfo
-    sql = "SELECT Refrigerator_ID, Refrigerator_Name FROM CustomerRefrigerator WHERE Customer_ID = '" + str(usageInfo.customerid +"'")
+    sql = "SELECT Refrigerator_ID, Refrigerator_Name FROM CustomerRefrigerator WHERE Customer_ID = '" + str(usageInfo.customerid) +"'"
     cursor.execute(sql)
     fridgeResult = cursor.fetchall() 
     
@@ -85,8 +108,8 @@ def checkIngredient():
 
     if request.method == 'POST':
         if request.form.getlist('checkbox'):
-
-            confirmIngredient = request.form.getlist('checkbox')   
+            
+            confirmIngredient = request.form.getlist('checkbox') 
             global usageInfo
             usageInfo.selectIngredient = confirmIngredient
 
@@ -132,7 +155,7 @@ def displayMenu():
             rate = json.loads(eachMenu[8])
             if rate['rate'] == []: avgRate = "-"
             else: avgRate = rate['avgRate']
-            detail.append({"FoodID":eachMenu[0], "menuName":eachMenu[2] , "Rate": avgRate})
+            detail.append({"FoodID":eachMenu[0], "menuName":eachMenu[2] , "Rate": avgRate, "Picture": eachMenu[7]})
     
     return render_template("availableMenu.html", listMenu=detail)
 
@@ -152,6 +175,7 @@ def displayRecipe():
         usageInfo.menuid    = menuID
         usageInfo.menuname  = menuData[2]
         usageInfo.chefname  = menuData[1]
+        usageInfo.picture   = menuData[7]
 
         menuInfo = {}
         menuInfo["menu"] = usageInfo.menuname
@@ -160,7 +184,7 @@ def displayRecipe():
         menuInfo["step"] = json.loads(menuData[4])["step"]
         menuInfo["price"] = menuData[5]
         menuInfo["vdo"]  = menuData[6]
-        menuInfo["pic"]  = menuData[7]
+        menuInfo["pic"]  = usageInfo.picture
         menuInfo["rate"] = json.loads(menuData[8])["avgRate"]
         menuInfo["desc"] = menuData[9]
 
@@ -170,12 +194,9 @@ def displayRecipe():
 @app.route('/fridgeSelection/ingredient/resultmenu/recipe/finish', methods=['GET', 'POST'])
 def done():
 
-    if request.method == 'POST':
-    
-        detail = request.form.get('finishButton')
-        global usageInfo
-        usageInfo.status = True 
-        return render_template("ratingMenu.html", chefname=usageInfo.chefname, menuname=usageInfo.menuname)
+    global usageInfo
+    usageInfo.status = True 
+    return render_template("ratingMenu.html", chefname=usageInfo.chefname, menuname=usageInfo.menuname, picture=usageInfo.picture)
 
 
 @app.route('/fridgeSelection/ingredient/resultmenu/recipe/finish/rateMenu', methods=['GET', 'POST'])
@@ -352,6 +373,9 @@ def navigateMode():
     if request.method == 'POST':
         
         selectFridge = request.form.get('selectFridge')
+
+        if selectFridge == "none": return redirect(url_for('displayFridge'))
+        
         global usageInfo
         # Declare Fridge that user select
         usageInfo.selectFridge = selectFridge
@@ -371,6 +395,12 @@ def navigateMode():
         if request.form['submit_button'] == 'cook': return redirect(url_for('displayIngredient'))
         else: return redirect(url_for('displayIngredientEdit'))
 
+#########################  MY MENU  #########################
+
+@app.route('/mymenu', methods=['GET', 'POST'])
+def mymenu():
+    
+    return render_template('mymenu.html')
 
 ######################### COIN SHOP #########################
 
